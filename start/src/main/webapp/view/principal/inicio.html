@@ -1,0 +1,16 @@
+<div>
+  <header class="clearfix">
+    <div data-ng-include="'view/template/header.jsp'"></div>
+  </header>
+</div>
+<section id="content">
+  <div data-ng-include="'view/template/menu.jsp'"></div>
+  <div class="row no-margin-right">
+    <div class="col-lg-12">
+      <div ng-view class="shuffle-animation margin-bottom"></div>
+    </div>
+  </div>
+</section>
+<div>
+  <div data-ng-include="'view/template/footer.jsp'"></div>
+</div>

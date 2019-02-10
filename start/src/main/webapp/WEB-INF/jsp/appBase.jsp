@@ -77,7 +77,7 @@
 	<script src="webjars/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
 	<!-- Grid -->
 	<script src="webjars/ui-grid/3.1.1/ui-grid.js"></script>
-	<script src='<c:url value="/ui/js/common/uiGridConfiguration.min.js"/>' charset="UTF-8"></script>
+	<script src='<c:url value="/ui/js/common/uiGridConfiguration.js"/>' charset="UTF-8"></script>
 	
 	<!-- Services -->
 	<script src='<c:url value="/ui/js/angularApp/service/commonService.js"/>' charset="UTF-8"></script>

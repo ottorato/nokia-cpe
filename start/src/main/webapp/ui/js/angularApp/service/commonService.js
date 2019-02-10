@@ -6,6 +6,12 @@
     angular.module('commonModule', []).factory(serviceId, commonService);
 
     commonService.$inject = ['$http', '$q', 'common'];
+    
+    var MSG_DEFAULT = {
+    		OK: "Proccess succesful",
+    		FAIL: "Proccess fail",
+    		SERIOUS: "Unspecified error"
+    }
 
     function commonService($http, $q, common) {
         var sesionTerminada = false;
@@ -23,7 +29,9 @@
             ajaxPostRequets: ajaxPostRequets,
             ajaxPostRequetsConfig: ajaxPostRequetsConfig,
             
-            ajaxDeleteRequest: ajaxDeleteRequest
+            ajaxDeleteRequest: ajaxDeleteRequest,
+            
+            procesaRespuestaBackend: procesaRespuestaBackend
         };
         return service;
 
@@ -49,6 +57,26 @@
 
         function increaseContador() {
             contador++;
+        }
+        
+        function procesaRespuestaBackend(data) {
+        	if (data) {
+    			if (data.codigo === 0) {
+    				if (data.mensaje) {
+    					logSuccess(data.mensaje);
+	    			} else {
+	    				logSuccess(MSG_DEFAULT.OK);
+	    			}
+    			} else {
+    				if (data.mensaje) {
+    					logError(data.mensaje);
+    				} else {
+    					logError(MSG_DEFAULT.FAIL);
+    				}
+    			}
+    		} else {
+				logError(MSG_DEFAULT.SERIOUS);
+			}
         }
 
         function getLoggedUser() {

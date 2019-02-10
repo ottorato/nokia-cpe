@@ -1,5 +1,7 @@
 package com.rato.basic.model;
 
+import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,14 +16,27 @@ import javax.persistence.Table;
 @Table(name = "CPE")
 public class CPE {
 	private Long id;
-	private String nombre;
 	private String serie;
 	private String suscriptor;
 	private String firmware;
 	private String ipAddress;
 	private String macAddress;
 	private Model model;
+	private Date ultimoContacto;
 	
+	public CPE(String serie, String suscriptor, String firmware, String ipAddress, String macAddress, Model model) {
+		super();
+		this.serie = serie;
+		this.suscriptor = suscriptor;
+		this.firmware = firmware;
+		this.ipAddress = ipAddress;
+		this.macAddress = macAddress;
+		this.model = model;
+	}
+	
+	public CPE() {
+		super();
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
@@ -30,15 +45,6 @@ public class CPE {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	@Basic
-	@Column(name = "NOMBRE", nullable = false)
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 	
 	@Basic
@@ -93,5 +99,14 @@ public class CPE {
 	}
 	public void setMacAddress(String macAddress) {
 		this.macAddress = macAddress;
+	}
+	
+	@Basic
+	@Column(name = "ULTIMO_CONTACTO", nullable = true)
+	public Date getUltimoContacto() {
+		return ultimoContacto;
+	}
+	public void setUltimoContacto(Date ultimoContacto) {
+		this.ultimoContacto = ultimoContacto;
 	}
 }

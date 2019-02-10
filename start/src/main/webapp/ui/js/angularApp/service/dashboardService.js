@@ -14,7 +14,8 @@
 				guardarPais: guardarPais,
 				borrarModelo: borrarModelo,
 				guardarMarca: guardarMarca,
-				guardarModelo: guardarModelo
+				guardarModelo: guardarModelo,
+				guardarCPE: guardarCPE
 	    	};
 	    	return service;
 	    	
@@ -52,6 +53,10 @@
 	    	
 	    	function guardarMarca(idPais, nombre, oui) {
 	            return commonService.ajaxPostRequets('/dash/guardarMarca?idPais=' + idPais + '&nombre=' + nombre + "&oui=" + oui);
+	        }
+	    	
+	    	function guardarCPE(cpe) {
+	            return commonService.ajaxPostRequets('/dash/guardarCPE', cpe);
 	        }
     }]);
 })();

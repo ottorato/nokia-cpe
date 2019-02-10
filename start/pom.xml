@@ -45,9 +45,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -132,6 +138,29 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+			    <groupId>org.jvnet-jaxb2-maven2</groupId>
+			    <artifactId>maven-jaxb20-plugin</artifactId>
+			    <version>0.12.3</version>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>		            
+			        </execution>
+			  	</executions>
+		        <configuration>
+		        	<schemaLanguage>WSDL</schemaLanguage>
+		        	<generatePackage>com.rato.basic.ws</generatePackage>
+	                <schemas>
+	                	<schema>
+	               			<url>testmodulesComun.wsdl</url>
+	                	</schema>
+	                </schemas>
+	                <packageName>se.west</packageName>		        
+		        </configuration>
 			</plugin>
 		</plugins>
 	</build>

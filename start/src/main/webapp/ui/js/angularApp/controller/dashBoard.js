@@ -1,8 +1,8 @@
 (function () {
         'use strict';
         var controllerId = 'dashBoardController';
-        angular.module('app').controller(controllerId, ['$scope', 'common', 'uiGridConfiguration', 'dashboardService',
-        function ($scope, common, uiGridConfiguration, dashboardService) {
+        angular.module('app').controller(controllerId, ['$scope', 'common', 'uiGridConfiguration', 'dashboardService', 'commonService',
+        function ($scope, common, uiGridConfiguration, dashboardService, commonService) {
 
             var vm = this;
             var getLogFn = common.logger.getLogFn;
@@ -156,6 +156,23 @@
             		} else {
         				logError("Error grave");
         			}
+            	})
+            }
+            
+            vm.saveCPE = function () {
+            	var cpeDTO = {
+            			id: vm.cpe.id,
+            			serie: vm.cpe.serial,
+            			suscriptor: vm.cpe.suscriber,
+            			firmware: vm.cpe.firmware,
+            			ipAddress: vm.cpe.ip,
+            			macAddress: vm.cpe.mac,
+            			modelId: vm.cpe.model
+            	}
+            	dashboardService.guardarCPE(cpeDTO).then(function (data) {
+            		if (data) {
+            			commonService.procesaRespuestaBackend(data);
+            		}
             	})
             }
             

@@ -1,0 +1,861 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://testmodules.webservices.smp.motive.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="impl:com.motive.smp.webservices.testmodules.exceptions" name="TestModulesWebService" targetNamespace="http://testmodules.webservices.smp.motive.com">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="impl:com.motive.smp.webservices.testmodules.exceptions" xmlns:ns1="impl:com.motive.smp.webservices.operations" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="impl:com.motive.smp.webservices.testmodules.exceptions">
+  <xs:import namespace="impl:com.motive.smp.webservices.operations"/>
+  <xs:element name="TestGroupNotFoundException" type="tns:TestGroupNotFoundException"/>
+  <xs:element name="TestModuleException" type="tns:TestModuleException"/>
+  <xs:element name="TestModuleImplementationException" type="tns:TestModuleImplementationException"/>
+  <xs:element name="TestModuleNotAvailableException" type="tns:TestModuleNotAvailableException"/>
+  <xs:element name="TestModuleNotFoundException" type="tns:TestModuleNotFoundException"/>
+  <xs:element name="TestModuleTimeoutException" type="tns:TestModuleTimeoutException"/>
+  <xs:complexType name="TestModuleException">
+    <xs:sequence>
+      <xs:element name="ErrorCode" nillable="true" type="xs:string"/>
+      <xs:element name="Message" nillable="true" type="xs:string"/>
+      <xs:element name="Arguments" nillable="true" type="ns1:ArrayOf_Xsd_String"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestModuleNotAvailableException">
+    <xs:complexContent>
+      <xs:extension base="tns:TestModuleException">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TestModuleTimeoutException">
+    <xs:complexContent>
+      <xs:extension base="tns:TestModuleException">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TestModuleNotFoundException">
+    <xs:complexContent>
+      <xs:extension base="tns:TestModuleException">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TestGroupNotFoundException">
+    <xs:complexContent>
+      <xs:extension base="tns:TestModuleException">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TestModuleImplementationException">
+    <xs:complexContent>
+      <xs:extension base="tns:TestModuleException">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="impl:com.motive.smp.webservices.testmodules" xmlns:ns1="impl:com.motive.smp.webservices.operations" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="impl:com.motive.smp.webservices.testmodules">
+  <xs:import namespace="impl:com.motive.smp.webservices.operations"/>
+  <xs:complexType name="GetAvailableTestModules">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="GetAvailableTestModulesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestModuleNames" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModuleAsync">
+    <xs:sequence>
+      <xs:element name="TestModuleName" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestModuleParameters" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParpContext" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="Callback" nillable="true" type="ns1:CallbackDescriptor"/>
+      <xs:element name="TestModuleTimeoutInSeconds" type="xs:long"/>
+      <xs:element name="RetrieveCachedResults" type="xs:boolean"/>
+      <xs:element name="RequestContext" nillable="true" type="xs:string"/>
+      <xs:element name="CacheType" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModuleAsyncResponse">
+    <xs:sequence>
+      <xs:element name="ExecuteTestModuleAsyncReturn" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModules">
+    <xs:sequence>
+      <xs:element name="TestModuleSpecifiers" nillable="true" type="tns:TestModuleSpecifiers"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParpContext" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="TestModuleTimeoutInSeconds" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestModuleSpecifiers">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestModuleSpecifier" nillable="true" type="tns:TestModuleSpecifier"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestModuleSpecifier">
+    <xs:sequence>
+      <xs:element name="TestModuleName" nillable="true" type="xs:string"/>
+      <xs:element name="RetrieveCachedResults" type="xs:boolean"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestModuleParameters" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="CacheType" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModulesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExecuteTestModulesReturn" nillable="true" type="tns:TestModuleResult"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestModuleResult">
+    <xs:sequence>
+      <xs:element name="FinalTestModuleResult" type="xs:boolean"/>
+      <xs:element name="TestModuleName" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Results" nillable="true" type="tns:ComplexExecutionResults"/>
+      <xs:element name="OverlayType" nillable="true" type="xs:string"/>
+      <xs:element name="Cached" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComplexExecutionResults">
+    <xs:sequence>
+      <xs:element name="Type" nillable="true" type="xs:string"/>
+      <xs:element name="Key" nillable="true" type="xs:string"/>
+      <xs:element name="SimpleValue" nillable="true" type="xs:string"/>
+      <xs:element name="ComplexValues" nillable="true" type="tns:ArrayExecutionResults"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayExecutionResults">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ComplexValue" nillable="true" type="tns:ComplexExecutionResults"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestGroupAsync">
+    <xs:sequence>
+      <xs:element name="TestGroupName" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParpContext" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="Callback" nillable="true" type="ns1:CallbackDescriptor"/>
+      <xs:element name="TestGroupTimeoutInSeconds" type="xs:long"/>
+      <xs:element name="RequestContext" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestGroupAsyncResponse">
+    <xs:sequence>
+      <xs:element name="ExecuteTestGroupAsyncReturn" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteInitAppAsync">
+    <xs:sequence>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="IncludeStartupGroup" type="xs:boolean"/>
+      <xs:element name="RequestContext" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteInitAppAsyncResponse">
+    <xs:sequence>
+      <xs:element name="ExecuteInitAppAsyncReturn" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestGroup">
+    <xs:sequence>
+      <xs:element name="TestGroupName" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParpContext" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="TestGroupTimeoutInSeconds" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestGroupResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExecuteTestGroupReturn" nillable="true" type="tns:TestModuleResult"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAvailableTestGroups">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="GetAvailableTestGroupsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestGroupNames" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteInitApp">
+    <xs:sequence>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="IncludeStartupGroup" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteInitAppResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExecuteInitAppReturn" nillable="true" type="tns:TestModuleResult"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModule">
+    <xs:sequence>
+      <xs:element name="TestModuleName" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestModuleParameters" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParpContext" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="TestModuleTimeoutInSeconds" type="xs:long"/>
+      <xs:element name="RetrieveCachedResults" type="xs:boolean"/>
+      <xs:element name="CacheType" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModuleResponse">
+    <xs:sequence>
+      <xs:element name="ExecuteTestModuleReturn" nillable="true" type="tns:TestModuleResult"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModulesAsync">
+    <xs:sequence>
+      <xs:element name="TestModuleSpecifiers" nillable="true" type="tns:TestModuleSpecifiers"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParpContext" nillable="true" type="ns1:KeyValuePair"/>
+      <xs:element name="Subscriber" nillable="true" type="ns1:SubscriberDescriptor"/>
+      <xs:element name="User" nillable="true" type="ns1:UserDescriptor"/>
+      <xs:element name="Callback" nillable="true" type="ns1:CallbackDescriptor"/>
+      <xs:element name="TestModuleTimeoutInSeconds" type="xs:long"/>
+      <xs:element name="RequestContext" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExecuteTestModulesAsyncResponse">
+    <xs:sequence>
+      <xs:element name="ExecuteTestModulesAsyncReturn" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetTestModuleDetails">
+    <xs:sequence>
+      <xs:element name="TestModuleName" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetTestModuleDetailsResponse">
+    <xs:sequence>
+      <xs:element name="TestModuleDescriptor" nillable="true" type="tns:TestModuleDescriptor"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TestModuleDescriptor">
+    <xs:sequence>
+      <xs:element name="TestModuleName" nillable="true" type="xs:string"/>
+      <xs:element name="TestModuleDisplayName" nillable="true" type="xs:string"/>
+      <xs:element name="Description" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TestModuleParameterKeys" nillable="true" type="xs:string"/>
+      <xs:element name="OverlayType" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Metadata" nillable="true" type="ns1:KeyValuePair"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="impl:com.motive.smp.webservices.operations" elementFormDefault="qualified" targetNamespace="impl:com.motive.smp.webservices.operations" version="1.0">
+
+  <xs:complexType name="ArrayOf_Xsd_String">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Item" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="KeyValuePair">
+    <xs:sequence>
+      <xs:element name="Key" nillable="true" type="xs:string"/>
+      <xs:element name="Value" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SubscriberDescriptor">
+    <xs:sequence>
+      <xs:element name="Attributes" nillable="true" type="tns:ArrayOfKeyValuePair"/>
+      <xs:element name="ExternalCaseID" nillable="true" type="xs:string"/>
+      <xs:element name="Labels" nillable="true" type="tns:ArrayOf_Xsd_String"/>
+      <xs:element name="UniqueID" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrayOfKeyValuePair">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Item" nillable="true" type="tns:KeyValuePair"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UserDescriptor">
+    <xs:sequence>
+      <xs:element name="Attributes" nillable="true" type="tns:ArrayOfKeyValuePair"/>
+      <xs:element name="Labels" nillable="true" type="tns:ArrayOf_Xsd_String"/>
+      <xs:element name="UniqueID" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CallbackDescriptor">
+    <xs:sequence>
+      <xs:element name="Parameters" nillable="true" type="tns:ArrayOfKeyValuePair"/>
+      <xs:element name="Type" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns2="impl:com.motive.smp.webservices.operations" xmlns:ns1="impl:com.motive.smp.webservices.testmodules" xmlns="http://testmodules.webservices.smp.motive.com" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://testmodules.webservices.smp.motive.com">
+  <xs:import namespace="impl:com.motive.smp.webservices.testmodules"/>
+  <xs:import namespace="impl:com.motive.smp.webservices.operations"/>
+  <xs:element name="executeInitApp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteInitApp"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeInitAppAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteInitAppAsync"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeInitAppAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteInitAppAsyncResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeInitAppResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteInitAppResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteTestGroup"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestGroupAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteTestGroupAsync"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestGroupAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteTestGroupAsyncResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteTestGroupResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteTestModule"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModuleAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteTestModuleAsync"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModuleAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteTestModuleAsyncResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModuleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteTestModuleResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteTestModules"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModulesAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:ExecuteTestModulesAsync"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModulesAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteTestModulesAsyncResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="executeTestModulesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:ExecuteTestModulesResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAvailableTestGroups">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:GetAvailableTestGroups"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAvailableTestGroupsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:GetAvailableTestGroupsResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAvailableTestModules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:GetAvailableTestModules"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAvailableTestModulesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:GetAvailableTestModulesResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getTestModuleDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parameters" type="ns1:GetTestModuleDetails"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getTestModuleDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="ns1:GetTestModuleDetailsResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="TestModuleNotFoundException">
+    <wsdl:part element="ns1:TestModuleNotFoundException" name="TestModuleNotFoundException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestGroupNotFoundException">
+    <wsdl:part element="ns1:TestGroupNotFoundException" name="TestGroupNotFoundException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModulesResponse">
+    <wsdl:part element="tns:executeTestModulesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestModuleImplementationException">
+    <wsdl:part element="ns1:TestModuleImplementationException" name="TestModuleImplementationException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestModuleNotAvailableException">
+    <wsdl:part element="ns1:TestModuleNotAvailableException" name="TestModuleNotAvailableException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeInitAppAsyncResponse">
+    <wsdl:part element="tns:executeInitAppAsyncResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModuleAsync">
+    <wsdl:part element="tns:executeTestModuleAsync" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestModuleTimeoutException">
+    <wsdl:part element="ns1:TestModuleTimeoutException" name="TestModuleTimeoutException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModuleAsyncResponse">
+    <wsdl:part element="tns:executeTestModuleAsyncResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModuleResponse">
+    <wsdl:part element="tns:executeTestModuleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeInitApp">
+    <wsdl:part element="tns:executeInitApp" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModulesAsyncResponse">
+    <wsdl:part element="tns:executeTestModulesAsyncResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestGroupAsyncResponse">
+    <wsdl:part element="tns:executeTestGroupAsyncResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableTestModules">
+    <wsdl:part element="tns:getAvailableTestModules" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModules">
+    <wsdl:part element="tns:executeTestModules" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestGroupResponse">
+    <wsdl:part element="tns:executeTestGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeInitAppAsync">
+    <wsdl:part element="tns:executeInitAppAsync" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestGroup">
+    <wsdl:part element="tns:executeTestGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTestModuleDetailsResponse">
+    <wsdl:part element="tns:getTestModuleDetailsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModulesAsync">
+    <wsdl:part element="tns:executeTestModulesAsync" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableTestModulesResponse">
+    <wsdl:part element="tns:getAvailableTestModulesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestGroupAsync">
+    <wsdl:part element="tns:executeTestGroupAsync" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableTestGroupsResponse">
+    <wsdl:part element="tns:getAvailableTestGroupsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestModuleException">
+    <wsdl:part element="ns1:TestModuleException" name="TestModuleException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableTestGroups">
+    <wsdl:part element="tns:getAvailableTestGroups" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeTestModule">
+    <wsdl:part element="tns:executeTestModule" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeInitAppResponse">
+    <wsdl:part element="tns:executeInitAppResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTestModuleDetails">
+    <wsdl:part element="tns:getTestModuleDetails" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TestModulesWebServicePortType">
+    <wsdl:operation name="getAvailableTestModules">
+      <wsdl:input message="tns:getAvailableTestModules" name="getAvailableTestModules">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableTestModulesResponse" name="getAvailableTestModulesResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModuleAsync">
+      <wsdl:input message="tns:executeTestModuleAsync" name="executeTestModuleAsync">
+    </wsdl:input>
+      <wsdl:output message="tns:executeTestModuleAsyncResponse" name="executeTestModuleAsyncResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleNotFoundException" name="TestModuleNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleNotAvailableException" name="TestModuleNotAvailableException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModules">
+      <wsdl:input message="tns:executeTestModules" name="executeTestModules">
+    </wsdl:input>
+      <wsdl:output message="tns:executeTestModulesResponse" name="executeTestModulesResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleTimeoutException" name="TestModuleTimeoutException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleNotFoundException" name="TestModuleNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleImplementationException" name="TestModuleImplementationException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestGroupAsync">
+      <wsdl:input message="tns:executeTestGroupAsync" name="executeTestGroupAsync">
+    </wsdl:input>
+      <wsdl:output message="tns:executeTestGroupAsyncResponse" name="executeTestGroupAsyncResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestGroupNotFoundException" name="TestGroupNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeInitAppAsync">
+      <wsdl:input message="tns:executeInitAppAsync" name="executeInitAppAsync">
+    </wsdl:input>
+      <wsdl:output message="tns:executeInitAppAsyncResponse" name="executeInitAppAsyncResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestGroup">
+      <wsdl:input message="tns:executeTestGroup" name="executeTestGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:executeTestGroupResponse" name="executeTestGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleTimeoutException" name="TestModuleTimeoutException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestGroupNotFoundException" name="TestGroupNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleImplementationException" name="TestModuleImplementationException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableTestGroups">
+      <wsdl:input message="tns:getAvailableTestGroups" name="getAvailableTestGroups">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableTestGroupsResponse" name="getAvailableTestGroupsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeInitApp">
+      <wsdl:input message="tns:executeInitApp" name="executeInitApp">
+    </wsdl:input>
+      <wsdl:output message="tns:executeInitAppResponse" name="executeInitAppResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleTimeoutException" name="TestModuleTimeoutException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleImplementationException" name="TestModuleImplementationException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModule">
+      <wsdl:input message="tns:executeTestModule" name="executeTestModule">
+    </wsdl:input>
+      <wsdl:output message="tns:executeTestModuleResponse" name="executeTestModuleResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleTimeoutException" name="TestModuleTimeoutException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleNotFoundException" name="TestModuleNotFoundException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleNotAvailableException" name="TestModuleNotAvailableException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleImplementationException" name="TestModuleImplementationException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModulesAsync">
+      <wsdl:input message="tns:executeTestModulesAsync" name="executeTestModulesAsync">
+    </wsdl:input>
+      <wsdl:output message="tns:executeTestModulesAsyncResponse" name="executeTestModulesAsyncResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleNotFoundException" name="TestModuleNotFoundException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTestModuleDetails">
+      <wsdl:input message="tns:getTestModuleDetails" name="getTestModuleDetails">
+    </wsdl:input>
+      <wsdl:output message="tns:getTestModuleDetailsResponse" name="getTestModuleDetailsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TestModuleNotAvailableException" name="TestModuleNotAvailableException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:TestModuleException" name="TestModuleException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TestModulesWebServiceSoapBinding" type="tns:TestModulesWebServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAvailableTestModules">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAvailableTestModules">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAvailableTestModulesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModuleAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeTestModuleAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeTestModuleAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleNotFoundException">
+        <soap:fault name="TestModuleNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleNotAvailableException">
+        <soap:fault name="TestModuleNotAvailableException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModules">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeTestModules">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeTestModulesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleTimeoutException">
+        <soap:fault name="TestModuleTimeoutException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleNotFoundException">
+        <soap:fault name="TestModuleNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleImplementationException">
+        <soap:fault name="TestModuleImplementationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestGroupAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeTestGroupAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeTestGroupAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestGroupNotFoundException">
+        <soap:fault name="TestGroupNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeInitAppAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeInitAppAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeInitAppAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeTestGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeTestGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleTimeoutException">
+        <soap:fault name="TestModuleTimeoutException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestGroupNotFoundException">
+        <soap:fault name="TestGroupNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleImplementationException">
+        <soap:fault name="TestModuleImplementationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableTestGroups">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAvailableTestGroups">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAvailableTestGroupsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeInitApp">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeInitApp">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeInitAppResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleTimeoutException">
+        <soap:fault name="TestModuleTimeoutException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleImplementationException">
+        <soap:fault name="TestModuleImplementationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModule">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeTestModule">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeTestModuleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleTimeoutException">
+        <soap:fault name="TestModuleTimeoutException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleNotFoundException">
+        <soap:fault name="TestModuleNotFoundException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleNotAvailableException">
+        <soap:fault name="TestModuleNotAvailableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleImplementationException">
+        <soap:fault name="TestModuleImplementationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeTestModulesAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeTestModulesAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeTestModulesAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleNotFoundException">
+        <soap:fault name="TestModuleNotFoundException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTestModuleDetails">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTestModuleDetails">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTestModuleDetailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TestModuleNotAvailableException">
+        <soap:fault name="TestModuleNotAvailableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TestModuleException">
+        <soap:fault name="TestModuleException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TestModulesWebService">
+    <wsdl:port binding="tns:TestModulesWebServiceSoapBinding" name="TestModulesWebServicePort">
+      <soap:address location="https://xtfeegcsmp.xdev.motive.com/nbi/testmodules"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

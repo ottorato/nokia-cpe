@@ -10,12 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rato.basic.dto.CPEDTO;
 import com.rato.basic.dto.RespuestaAngularDTO;
 import com.rato.basic.model.Brand;
+import com.rato.basic.model.CPE;
 import com.rato.basic.model.Model;
 import com.rato.basic.model.Pais;
 import com.rato.basic.service.BrandService;
@@ -145,9 +148,36 @@ public class DashboardController {
 
     	mapa.put("modelos", modelos);
 
-    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "Registro guardado exitosamente", mapa);
+    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "Record saved succesfully", mapa);
     	
     	return respuesta;
 	}
+    
+    @PostMapping(value="/guardarCPE")
+    public RespuestaAngularDTO guardarCPE(@RequestBody CPEDTO cpe) {
+    	Map<String, Object> mapa = new HashMap<>();
 	
+    	RespuestaAngularDTO respuesta = null;
+    	try {
+			if (cpe.getId() == null) {
+				Model model = modelService.findById(cpe.getModelId());
+				CPE cpePersistence = new CPE(cpe.getSerie(), cpe.getSuscriptor(), cpe.getFirmware(), cpe.getIpAddress(), cpe.getMacAddress(), model);
+				cpeService.save(cpePersistence);
+				respuesta = new RespuestaAngularDTO(0, "Record saved succesfully", mapa);
+			} else {
+				CPE cpePersistence = cpeService.findById(cpe.getId());
+				cpePersistence.setSerie(cpe.getSerie());
+				cpePersistence.setSuscriptor(cpe.getSuscriptor());
+				cpePersistence.setFirmware(cpe.getFirmware());
+				cpePersistence.setIpAddress(cpe.getIpAddress());
+				cpePersistence.setMacAddress(cpe.getMacAddress());
+				respuesta = new RespuestaAngularDTO(0, "Record updated succesfully", mapa);
+			}
+		} catch (Exception e) {
+	    	respuesta = new RespuestaAngularDTO(1, "Error persisting record", mapa);
+			e.printStackTrace();
+		}
+    	
+    	return respuesta;
+    }
 }

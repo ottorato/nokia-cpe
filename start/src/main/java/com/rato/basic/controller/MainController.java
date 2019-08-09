@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = {"/", "/app", "/cpe"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/app", "/cpe", "/catalogs"}, method = RequestMethod.GET)
 	public ModelAndView main() {
 		logger.info("Ctrl working fine.");
 		

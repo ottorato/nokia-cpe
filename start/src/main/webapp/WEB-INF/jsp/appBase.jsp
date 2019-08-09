@@ -55,9 +55,7 @@
 	<script src="webjars/angularjs/${angularVersion}/angular-route.js"></script>
 	<script src="webjars/angularjs/${angularVersion}/angular-sanitize.js"></script>
 	
-	<script src='<c:url value="/ui/bower_components/ng-bootstrap-submenu/ng-bootstrap-submenu.min.js"/>'></script>
-    <link  href='<c:url value="/ui/bower_components/ng-bootstrap-submenu/ng-bootstrap-submenu.min.css"/>' rel="stylesheet" type="text/css"/>
-	
+	<script src='<c:url value="/ui/bower_components/ng-bootstrap-submenu/ng-bootstrap-submenu.min.js"/>'></script>	
 	
 	<!-- AngularJS base application -->
 	<script src='<c:url value="/ui/js/app.js"/>' charset="UTF-8"></script>
@@ -70,6 +68,8 @@
 	
 	<script src="webjars/bootstrap/${bootstrapVersion}/js/bootstrap.min.js"></script>
 	
+	<!-- angular-ui-mask -->
+	<script src='<c:url value="/ui/bower_components/angular-ui-mask/dist/mask.min.js"/>' charset="UTF-8"></script>	
 	<!-- DOJO -->
 	<script src="webjars/dojo/1.10.4/dojo/dojo.js"></script>
 	<script src="webjars/angular-ui-mask/1.6.8/src/mask.js"></script>
@@ -82,10 +82,12 @@
 	<!-- Services -->
 	<script src='<c:url value="/ui/js/angularApp/service/commonService.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/service/dashboardService.js"/>' charset="UTF-8"></script>
+	<script src='<c:url value="/ui/js/angularApp/service/catalogsService.js"/>' charset="UTF-8"></script>
 	
 	<!-- Controllers -->
 	<script src='<c:url value="/ui/js/angularApp/controller/menu.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/controller/dashBoard.js"/>' charset="UTF-8"></script>
+	<script src='<c:url value="/ui/js/angularApp/controller/catalogs.js"/>' charset="UTF-8"></script>
 	
 </body>
 </html>

@@ -16,7 +16,7 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<description>Demo project for Spring Boot</description>
+	<description>Nokia project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -27,6 +27,19 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.5</version>
+		</dependency>
+		
+		<!-- Pull in as a traditional dependency -->
+		<dependency>
+		    <groupId>com.konghq</groupId>
+		    <artifactId>unirest-java</artifactId>
+		    <version>2.3.14</version>
+		</dependency>
+		
 		<dependency>
 		  <groupId>jstl</groupId>
 		  <artifactId>jstl</artifactId>
@@ -46,10 +59,10 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-web</artifactId> -->
+<!-- 		</dependency> -->
 		
 		<dependency>
 			<groupId>org.springframework.ws</groupId>
@@ -66,12 +79,15 @@
 <!-- 			<groupId>org.springframework.boot</groupId> -->
 <!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
 <!-- 		</dependency> -->
-	
+
+		
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -113,7 +129,7 @@
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>angular-block-ui</artifactId>
 			<version>0.2.2</version>
-		</dependency>
+		</dependency>				
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -140,28 +156,28 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
-			<plugin>
-			    <groupId>org.jvnet-jaxb2-maven2</groupId>
-			    <artifactId>maven-jaxb20-plugin</artifactId>
-			    <version>0.12.3</version>
-			    <executions>
-			        <execution>
-			            <goals>
-			                <goal>generate</goal>
-			            </goals>		            
-			        </execution>
-			  	</executions>
-		        <configuration>
-		        	<schemaLanguage>WSDL</schemaLanguage>
-		        	<generatePackage>com.rato.basic.ws</generatePackage>
-	                <schemas>
-	                	<schema>
-	               			<url>testmodulesComun.wsdl</url>
-	                	</schema>
-	                </schemas>
-	                <packageName>se.west</packageName>		        
-		        </configuration>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 			    <groupId>org.jvnet-jaxb2-maven2</groupId> -->
+<!-- 			    <artifactId>maven-jaxb20-plugin</artifactId> -->
+<!-- 			    <version>0.12.3</version> -->
+<!-- 			    <executions> -->
+<!-- 			        <execution> -->
+<!-- 			            <goals> -->
+<!-- 			                <goal>generate</goal> -->
+<!-- 			            </goals>		             -->
+<!-- 			        </execution> -->
+<!-- 			  	</executions> -->
+<!-- 		        <configuration> -->
+<!-- 		        	<schemaLanguage>WSDL</schemaLanguage> -->
+<!-- 		        	<generatePackage>com.rato.basic.ws</generatePackage> -->
+<!-- 	                <schemas> -->
+<!-- 	                	<schema> -->
+<!-- 	               			<url>testmodulesComun.wsdl</url> -->
+<!-- 	                	</schema> -->
+<!-- 	                </schemas> -->
+<!-- 	                <packageName>se.west</packageName>		         -->
+<!-- 		        </configuration> -->
+<!-- 			</plugin> -->
 		</plugins>
 	</build>
 </project>

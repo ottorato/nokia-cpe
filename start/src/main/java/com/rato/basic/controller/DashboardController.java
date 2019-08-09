@@ -1,5 +1,6 @@
 package com.rato.basic.controller;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,20 @@ import com.rato.basic.dto.CPEDTO;
 import com.rato.basic.dto.RespuestaAngularDTO;
 import com.rato.basic.model.Brand;
 import com.rato.basic.model.CPE;
+import com.rato.basic.model.CPEData;
+import com.rato.basic.model.EndPoint;
 import com.rato.basic.model.Model;
 import com.rato.basic.model.Pais;
 import com.rato.basic.service.BrandService;
 import com.rato.basic.service.CPEService;
+import com.rato.basic.service.EndPointService;
 import com.rato.basic.service.ModelService;
 import com.rato.basic.service.PaisService;
+
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
+
+
 
 @RestController
 @RequestMapping("/dash")
@@ -40,11 +49,67 @@ public class DashboardController {
 	@Autowired
     private ModelService modelService;
 	
-	@SuppressWarnings("unused")
 	@Autowired
     private CPEService cpeService;
 	
-    @GetMapping(value="/listaInicial", produces = "application/json")
+	@Autowired
+    private EndPointService endpointService;
+	
+	@GetMapping(value="/listaCPEs", produces = "application/json")
+    public RespuestaAngularDTO listaCPEs() {
+    	logger.info("Recuperando CPEs...");
+    	Map<String, Object> mapa = new HashMap<>();
+    	
+    	List<EndPoint> endpoints = endpointService.findAll();
+    	List<CPE> cpes = cpeService.findAll();
+    	mapa.put("endpoints", endpoints);
+    	mapa.put("cpes", cpes);
+    	
+    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", mapa);
+    	
+    	return respuesta;
+    }
+	
+	@GetMapping(value="/cpeStatus", produces = "application/json")
+    public RespuestaAngularDTO cpeStatus(String endPoint, String id) {
+
+		EndPoint ep = endpointService.findById(Long.valueOf(endPoint));
+		
+		CPE cpe = cpeService.findById(Long.valueOf(id));
+		CPEData cpeData = new CPEData(cpe);
+		
+		try {
+			String encode = URLEncoder.encode(ep.getURL(), "UTF-8"); 
+
+			HttpResponse<String> response = Unirest.post(encode)
+					  .header("Content-Type", "application/json")
+					  .header("Authorization", "Basic d2Vic2VydmljZXVzZXI6d2Vic2VydmljZXVzZXIx")
+					  .header("User-Agent", "PostmanRuntime/7.15.2")
+					  .header("Accept", "*/*")
+					  .header("Cache-Control", "no-cache")
+					  .header("Postman-Token", "3b53439b-339d-4adf-a6d5-f147574707e1,a06e73f8-dd4c-4c6c-8079-f46933a3d5ca")
+					  .header("Host", "xtfeegcsmp.xdev.motive.com")
+					  .header("Cookie", "JSESSIONID=IBEuV13NdKOoJGxenvvHPYsT.xtfee12_7403; JSESSIONIDSSO=1YrwEE7KWNiL_xy0Phyxpcxs; ROUTEID=.xtfee12_7403")
+					  .header("Accept-Encoding", "gzip, deflate")
+					  .header("Connection", "keep-alive")
+					  .header("cache-control", "no-cache")
+					  .body("{\"subscriber\": {\"uniqueID\": \"12345\"}, \"parameters\": {\"subscriberId\": \"" + cpe.getSuscriptor() + "\"}}")
+					  .asString();
+			parseResponse(response);
+		} catch (Exception| Error e) {
+			logger.error(e.getMessage());
+		}
+    	
+    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", null);
+    	
+    	return respuesta;
+    }
+	
+	private void parseResponse(HttpResponse<String> response) {
+		
+	}
+
+	@GetMapping(value="/listaInicial", produces = "application/json")
     public RespuestaAngularDTO listaInicial() {
     	logger.info("Recuperando estados y países...");
     	Map<String, Object> mapa = new HashMap<>();

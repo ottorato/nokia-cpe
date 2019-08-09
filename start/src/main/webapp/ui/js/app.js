@@ -5,6 +5,7 @@
         'ngRoute', // routing
         'ngSanitize', // sanitizes html bindings (ex: sidebar.js)
         'ui.bootstrap', //
+        'ui.mask', //angular-ui-mask
         'blockUI',
         'bootstrapSubmenu', // Menu Directive
         'ui.grid',
@@ -18,7 +19,8 @@
         'ui.grid.resizeColumns',
         'ui.grid.moveColumns',
         'ui.grid.autoResize',
-//        'ui.mask', //angular-ui-mask
+        'ui.grid.selection',
+        'ui.grid.cellNav',
         //'ui.select',
         'common', // common functions, logger, spinner 
 
@@ -46,13 +48,16 @@
         });
         
         $routeProvider.when('/', {
-            templateUrl: 'view/template/main.html'
+            templateUrl: 'view/template/dashboard.html'
         })
-        .when('/app',{
+        .when('/dashboard',{
         	 templateUrl: 'view/template/dashboard.html'
         })
         .when('/cpe',{
-        	 templateUrl: 'view/template/paises.html'
+        	 templateUrl: 'view/template/catalogs.html'
+        })
+        .when('/catalogs',{
+        	 templateUrl: 'view/template/catalogs.html'
         })
         .otherwise({
             redirectTo: '/'

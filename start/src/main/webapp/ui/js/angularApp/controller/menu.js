@@ -9,31 +9,24 @@
         (function () {
             var menus = [
             	{
-            		display: "Catálogos",
+            		display: "Catalogos",
             		children: [
                     	{
                     		display: "Estados",
-                    		children: [
-                    			{
-                    				display: "Alta",
-                            		href: "/paises",
-                            		children: []
-                    			}
-                    		]
+                    		children: [],
+                    		href: "/status/catalogs"
                     	}, {
                     	  display: "Países",
-                    		href: "/paises",
-                    		children: [
-                    			{
-                    				display: "Alta",
-                            		href: "/paises",
-                            		children: []
-                    			}
-                    		]
+                    	  children: [],
+                  		href: "/catalogs"
                     	}
                     ]
+            	}, {
+	                display: "Dashboard",
+	                children: [],
+	        		href: "/status/dashboard"
             	}
-            ];
+            ]
             menuCtrl.menuItems = menus;
         })();
         

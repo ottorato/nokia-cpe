@@ -11,9 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "CPE")
+@Table(name = "CPE", uniqueConstraints=@UniqueConstraint(columnNames={"suscriptor"}))
 public class CPE {
 	private Long id;
 	private String serie;

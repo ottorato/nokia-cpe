@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.rato.basic.model.CPE;
 
 @Repository
-public interface CPERepository extends JpaRepository<CPE, Long>{
+public interface CPERepository extends JpaRepository<CPE, Long> {
 
 }

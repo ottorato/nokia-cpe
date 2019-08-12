@@ -5,7 +5,9 @@ public class RespuestaAngularDTO {
 	private String mensaje;
 	private Object objeto;
 	
-	
+	public RespuestaAngularDTO() {
+		super();
+	}
 	public RespuestaAngularDTO(Integer codigo, String mensaje) {
 		super();
 		this.codigo = codigo;
@@ -17,6 +19,7 @@ public class RespuestaAngularDTO {
 		this.mensaje = mensaje;
 		this.objeto = objeto;
 	}
+	
 	public Integer getCodigo() {
 		return codigo;
 	}

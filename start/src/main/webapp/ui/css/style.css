@@ -3,8 +3,41 @@
   font-size: 1.5em;
 }
 
+.fa-database {
+  color: green;
+  font-size: 1.5em;
+}
+
+.fa-ban {
+  color: red;
+  font-size: 1.5em;
+}
+
+.fa-times {
+  color: red;
+  font-size: 1.5em;
+}
+
+.fa-wifi {
+  color: green;
+  font-size: 1.5em;
+}
+
 .vertcenterbot {
     margin-top: 15px;
+}
+
+.font-icons-table {
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: bold;
+	color: blue;
+}
+
+.font-icons-table-tachado {
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: bold;
+	color: red;
+	text-decoration: line-through;
 }
 
 .recortado {

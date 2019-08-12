@@ -1,6 +1,6 @@
 package com.rato.basic.controller;
 
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +25,7 @@ import com.rato.basic.model.EndPoint;
 import com.rato.basic.model.Model;
 import com.rato.basic.model.Pais;
 import com.rato.basic.service.BrandService;
+import com.rato.basic.service.CPEDataService;
 import com.rato.basic.service.CPEService;
 import com.rato.basic.service.EndPointService;
 import com.rato.basic.service.ModelService;
@@ -53,17 +54,31 @@ public class DashboardController {
     private CPEService cpeService;
 	
 	@Autowired
+    private CPEDataService cpeDataService;
+	
+	@Autowired
     private EndPointService endpointService;
 	
 	@GetMapping(value="/listaCPEs", produces = "application/json")
     public RespuestaAngularDTO listaCPEs() {
     	logger.info("Recuperando CPEs...");
     	Map<String, Object> mapa = new HashMap<>();
+    	List<CPEData> datosModems = new ArrayList<>();
     	
     	List<EndPoint> endpoints = endpointService.findAll();
     	List<CPE> cpes = cpeService.findAll();
+
+		cpes.forEach(cpe -> {
+			CPEData cpeData = cpeDataService.findTopByCpeIdOrderByDateDesc(cpe.getId());
+			if (cpeData != null) {
+				datosModems.add(cpeData);
+			} else {
+				datosModems.add(new CPEData(cpe));
+			}
+		});
+		
     	mapa.put("endpoints", endpoints);
-    	mapa.put("cpes", cpes);
+    	mapa.put("datosModems", datosModems);
     	
     	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", mapa);
     	
@@ -72,14 +87,15 @@ public class DashboardController {
 	
 	@GetMapping(value="/cpeStatus", produces = "application/json")
     public RespuestaAngularDTO cpeStatus(String endPoint, String id) {
-
+		RespuestaAngularDTO respuesta = new RespuestaAngularDTO();
+		
 		EndPoint ep = endpointService.findById(Long.valueOf(endPoint));
 		
 		CPE cpe = cpeService.findById(Long.valueOf(id));
 		CPEData cpeData = new CPEData(cpe);
 		
 		try {
-			String encode = URLEncoder.encode(ep.getURL(), "UTF-8"); 
+			String encode = ep.getURL().replaceAll(" ", "%20"); 
 
 			HttpResponse<String> response = Unirest.post(encode)
 					  .header("Content-Type", "application/json")
@@ -95,18 +111,34 @@ public class DashboardController {
 					  .header("cache-control", "no-cache")
 					  .body("{\"subscriber\": {\"uniqueID\": \"12345\"}, \"parameters\": {\"subscriberId\": \"" + cpe.getSuscriptor() + "\"}}")
 					  .asString();
-			parseResponse(response);
+			this.parseResponse(response, cpeData);
+			respuesta.setCodigo(0);
 		} catch (Exception| Error e) {
-			logger.error(e.getMessage());
+			logger.error("Excepción grave", e);
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Error checking modem status.");
 		}
-    	
-    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", null);
+		cpeDataService.save(cpeData);
+		
+    	respuesta.setObjeto(cpeData);  	
     	
     	return respuesta;
     }
 	
-	private void parseResponse(HttpResponse<String> response) {
+	private void parseResponse(HttpResponse<String> response, CPEData cpeData) {
 		
+		String body = response.getBody();
+		cpeData.setReachable(body.contains("CPE_REACHABLE"));
+		if(cpeData.isReachable()) {
+			cpeData.setManaged(true);
+
+			cpeData.setRadio(body.contains("RADIO_ENABLED"));
+			cpeData.setDhcp(body.contains("LAN_DHCP_ENABLED"));
+			cpeData.setNat(body.contains("NAT_ENABLED"));
+			cpeData.setFrecuency5GHz(body.contains("DEVICE_SUPPORTS_5GHZ"));
+		} else {
+			cpeData.setManaged(body.contains("CPE_MANAGED"));
+		}
 	}
 
 	@GetMapping(value="/listaInicial", produces = "application/json")

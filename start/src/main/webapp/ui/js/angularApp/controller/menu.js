@@ -24,7 +24,7 @@
             	}, {
 	                display: "Dashboard",
 	                children: [],
-	        		href: "/status/dashboard"
+	        		href: "/status/app"
             	}
             ]
             menuCtrl.menuItems = menus;

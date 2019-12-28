@@ -9,14 +9,14 @@
         (function () {
             var menus = [
             	{
-            		display: "Catalogos",
+            		display: "Catalogs",
             		children: [
                     	{
-                    		display: "Estados",
+                    		display: "States",
                     		children: [],
                     		href: "/status/catalogs"
                     	}, {
-                    	  display: "Países",
+                    	  display: "Countries",
                     	  children: [],
                   		href: "/catalogs"
                     	}

@@ -24,6 +24,7 @@ public class CPE {
 	private String macAddress;
 	private Model model;
 	private Date ultimoContacto;
+	private boolean enabled;
 	
 	public CPE(String serie, String suscriptor, String firmware, String ipAddress, String macAddress, Model model) {
 		super();
@@ -109,5 +110,14 @@ public class CPE {
 	}
 	public void setUltimoContacto(Date ultimoContacto) {
 		this.ultimoContacto = ultimoContacto;
+	}
+	@Basic
+	@Column(name = "ENABLED", nullable = false, columnDefinition = "boolean default true")
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

@@ -13,11 +13,13 @@
 				listaModelos: listaModelos,
 				listaModems: listaModems,
 				listaInicial: listaInicial,
+				listCPEs: listCPEs,
 				guardarPais: guardarPais,
 				borrarModelo: borrarModelo,
 				guardarMarca: guardarMarca,
 				guardarModelo: guardarModelo,
-				guardarCPE: guardarCPE
+				guardarCPE: guardarCPE,
+				toggleEnable: toggleEnable
 	    	};
 	    	return service;
 	    	
@@ -41,6 +43,11 @@
 	            return res;
 	    	}
 	    	
+	    	function listCPEs() {
+	            var res = commonService.ajaxGetRequets('/dash/listCPEs');
+	            return res;
+	    	}
+	    	
 	    	function guardarPais(id, nombre, nombreCorto) {
 	            return commonService.ajaxPostRequets('/dash/guardarPais?id=' + id + '&nombre=' + nombre + '&nombreCorto=' + nombreCorto);
 	        }
@@ -51,6 +58,10 @@
 	    	
 	    	function guardarModelo(id, idMarca, nombre) {
 	            return commonService.ajaxPostRequets('/dash/guardarModelo?id=' + id + '&idMarca=' + idMarca + '&nombre=' + nombre);
+	        }
+	    	
+	    	function toggleEnable(id, enabled) {
+	            return commonService.ajaxPostRequets('/dash/toggleEnable?id=' + id + '&enabled=' + enabled);
 	        }
 	    	
 	    	function guardarMarca(idPais, nombre, oui) {

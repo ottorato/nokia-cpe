@@ -34,10 +34,10 @@
     function appConfig($routeProvider, $locationProvider, blockUIConfig, $provide, $httpProvider) {
 //    	$provide.decorator('GridOptions', gridOptionsdecorator);
     	
-        blockUIConfig.message = 'Loading...';
+        blockUIConfig.message = 'Working...';
         var blockTemplate = '<div class="block-ui-overlay"></div>' +
         					'<div class="block-ui-message-container" aria-live="assertive" aria-atomic="true">' +
-        						'<div class="block-ui-message" ng-class="$_blockUiMessageClass"><i class="fa fa-spinner fa-spin fa-2x fa-fw" style="vertical-align:middle;" ></i>&nbsp; Loading...</div> ' +
+        						'<div class="block-ui-message" ng-class="$_blockUiMessageClass"><i class="fa fa-refresh fa-spin fa-2x fa-fw" style="vertical-align:middle;" ></i>&nbsp; ' + blockUIConfig.message + '</div> ' +
         					'</div>' +
         					'<iframe class="cover" src="about:blank"></iframe>';
     	blockUIConfig.template = blockTemplate;

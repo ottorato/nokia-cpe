@@ -34,8 +34,6 @@ import com.rato.basic.service.PaisService;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
-
-
 @RestController
 @RequestMapping("/dash")
 public class DashboardController {
@@ -59,9 +57,9 @@ public class DashboardController {
 	@Autowired
     private EndPointService endpointService;
 	
-	@GetMapping(value="/listaCPEs", produces = "application/json")
-    public RespuestaAngularDTO listaCPEs() {
-    	logger.info("Recuperando CPEs...");
+	@GetMapping(value="/listCPEData", produces = "application/json")
+    public RespuestaAngularDTO listCPEData() {
+    	logger.info("Getting CPE data...");
     	Map<String, Object> mapa = new HashMap<>();
     	List<CPEData> datosModems = new ArrayList<>();
     	
@@ -80,6 +78,37 @@ public class DashboardController {
     	mapa.put("endpoints", endpoints);
     	mapa.put("datosModems", datosModems);
     	
+    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", mapa);
+    	
+    	return respuesta;
+    }
+	
+	@GetMapping(value="/listCPEs", produces = "application/json")
+    public RespuestaAngularDTO listCPEs() {
+    	logger.info("Getting CPEs...");
+    	Map<String, Object> mapa = new HashMap<>();
+    	
+    	List<CPE> cpes = cpeService.findAll();
+
+    	mapa.put("cpes", cpes);
+    	
+    	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", mapa);
+    	
+    	return respuesta;
+    }
+	
+	@PostMapping(value="/toggleEnable", produces = "application/json")
+    public RespuestaAngularDTO toggleEnable(Long id, boolean enabled) {
+    	logger.info("Saving CPEs...");
+    	Map<String, Object> mapa = new HashMap<>();
+    	
+    	CPE cpe = cpeService.findById(id);
+    	cpe.setEnabled(enabled);
+    	cpeService.save(cpe);
+    	
+    	List<CPE> cpes = cpeService.findAll();
+
+    	mapa.put("cpes", cpes);
     	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", mapa);
     	
     	return respuesta;
@@ -149,10 +178,12 @@ public class DashboardController {
     	List<Pais> paises = paisService.findAll();
     	List<Brand> marcas = brandService.findAll();
     	List<Model> modelos = modelService.findAll();
+    	List<CPE> cpes = cpeService.findAll();
     	
     	mapa.put("paises", paises);
     	mapa.put("brands", marcas);
     	mapa.put("modelos", modelos);
+    	mapa.put("cpes", cpes);
     	
     	RespuestaAngularDTO respuesta = new RespuestaAngularDTO(0, "", mapa);
     	

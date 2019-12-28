@@ -97,7 +97,7 @@
 					                    	<div class="col-lg-3 col-md-4 col-sm-6">
 					                            <button class="btn btn-default btn-default2 vertcenterbot pull-right" ng-click="vm.cancelEdit()" 
 					                            	ng-disabled="!vm.modelo.brand">
-								                    <i class="fa fa-times"></i>&nbsp;cancel
+								                    <i class="fa fa-trash-o"></i>&nbsp;cancel
 								                </button>
 					                        </div>
 					                    	<div class="col-lg-3 col-md-4 col-sm-6">
@@ -114,38 +114,44 @@
                        	</div>
                        	<div class="panel-body" ng-show="vm.isSet('data', 2)">
 							<div class="container-fluid">
-								<div class="row separador"></div>
-								<div class="row separador"></div>
 		                        <div class="table-responsive" style="overflow:hidden">
 		                        	<div class="row">
 		                        		<div class="col-lg-12">
 		                        			<div class="col-lg-12 well"> 
 		                        				<h3>Data</h3>
 		                        				<div class="row">
-		                        					<div class="col-lg-3 col-md-3">
+							                       <div class="panel panel-default">
+							                           <div class="panel-body">
+							                               <div id="grid2" ng-style="{'cursor': pointer}" class="grid" data-ui-grid="vm.gridOptionsG2" ui-grid-auto-resize data-ui-grid-pagination data-ui-grid-selection data-ui-grid-exporter>
+							                               </div>
+							                           </div>
+							                       </div>
+							                    </div>
+		                        				<div class="row">
+		                        					<div class="col-lg-2 col-md-3">
 						                        		<label class='recortado'>Device Type:</label>
 						                                <select class="form-control" name="idPais" ng-model="vm.cpe.model"
 					                                        ng-options="item.id as item.brand.nombre +' - ' + item.nombre for item in vm.modelos track by item.id" ng-disabled="false">
 						                                    <option value="">{{ ::vm.DEFAULT_OPTION_SELECT }}</option>
 						                                </select>
 						                            </div>
-						                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
+						                            <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
 							                       		<label class='recortado'>Serial Number:</label>
 							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.serial">
 							                    	</div>
-							                    	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
+							                    	<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
 							                       		<label class='recortado'>IP Address:</label>
-							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.ip" ui-mask="(9?9?9?){1, 3}\.(9){1, 3}\.(9){1, 3}\.(9){1, 3}" ui-mask-placeholder ui-mask-placeholder-char="_">
+							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.ip" pattern="(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)_*(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)_*){3}">
 							                    	</div>
-							                    	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
+							                    	<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
 							                       		<label class='recortado'>MAC Address:</label>
-							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.mac" ui-mask="" ui-mask-placeholder ui-mask-placeholder-char="_">
+							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.mac" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$">
 							                    	</div>
-							                    	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
+							                    	<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
 							                       		<label class='recortado'>Subscriber Reference ID:</label>
 							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.suscriber">
 							                    	</div>
-							                    	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
+							                    	<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" ng-show='true'>
 							                       		<label class='recortado'>Software Version:</label>
 							                            <input type="text" class="form-control" title="" ng-model="vm.cpe.firmware">
 							                    	</div>
@@ -154,13 +160,13 @@
 		                        					<div class="col-lg-1 col-md-1 col-sm-2">
 							                            <button class="btn btn-default btn-default2 vertcenterbot" ng-click="vm.cancelEdit()" 
 							                            	ng-disabled="!vm.modelo.brand">
-										                    <i class="fa fa-times"></i>&nbsp;cancel
+										                    <i class="fa fa-trash-o"></i>&nbsp;Cancel
 										                </button>
 							                        </div>
 							                    	<div class="col-lg-1 col-md-1 col-sm-2">
 							                            <button class="btn btn-default btn-default2 vertcenterbot" ng-click="vm.saveCPE()" 
 							                            	ng-disabled="!vm.cpe.model || !vm.cpe.serial || !vm.cpe.ip || !vm.cpe.mac">
-										                    <i class="fa fa-floppy-o"></i>&nbsp;save
+										                    <i class="fa fa-floppy-o"></i>&nbsp;Save
 										                </button>
 							                        </div>
 		                        				</div>

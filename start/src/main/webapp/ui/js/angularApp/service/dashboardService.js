@@ -15,7 +15,7 @@
 	    	return service;
 	    	
 	    	function listaCPEs() {
-	            var res = commonService.ajaxGetRequets(javaControllerPrefix + '/listaCPEs');
+	            var res = commonService.ajaxGetRequets(javaControllerPrefix + '/listaCPEData');
 	            return res;
 	    	}
 	    	

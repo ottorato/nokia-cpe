@@ -59,6 +59,9 @@
         .when('/catalogs',{
         	 templateUrl: 'view/template/catalogs.html'
         })
+        .when('/address',{
+        	 templateUrl: 'view/template/tools.html'
+        })
         .otherwise({
             redirectTo: '/'
         });

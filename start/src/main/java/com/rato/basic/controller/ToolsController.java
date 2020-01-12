@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rato.basic.dto.RespuestaAngularDTO;
-import com.rato.basic.model.CPE;
 import com.rato.basic.model.CPEData;
-import com.rato.basic.model.EndPoint;
 
 @RestController
 @RequestMapping("/tools")

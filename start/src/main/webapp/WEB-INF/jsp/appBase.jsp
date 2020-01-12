@@ -83,11 +83,13 @@
 	<script src='<c:url value="/ui/js/angularApp/service/commonService.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/service/dashboardService.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/service/catalogsService.js"/>' charset="UTF-8"></script>
+	<script src='<c:url value="/ui/js/angularApp/service/toolsService.js"/>' charset="UTF-8"></script>
 	
 	<!-- Controllers -->
 	<script src='<c:url value="/ui/js/angularApp/controller/menu.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/controller/dashBoard.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/controller/catalogs.js"/>' charset="UTF-8"></script>
+	<script src='<c:url value="/ui/js/angularApp/controller/tools.js"/>' charset="UTF-8"></script>
 	
 </body>
 </html>

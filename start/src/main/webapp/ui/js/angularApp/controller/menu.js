@@ -18,7 +18,11 @@
                     	}, {
                     	  display: "Countries",
                     	  children: [],
-                  		href: "/catalogs"
+                  		  href: "/catalogs"
+                    	}, {
+                    	  display: "Address",
+                    	  children: [],
+                  		  href: "/status/address"
                     	}
                     ]
             	}, {

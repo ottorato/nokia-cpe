@@ -1,6 +1,7 @@
 package com.rato.basic.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -28,8 +29,11 @@ public class PaisServiceImpl implements PaisService {
 	
 	@Override
 	public Pais findById(Long id) {
-		Pais pais = repository.findById(id).get();
-		
+		Pais pais = null;
+		Optional<Pais> optional = repository.findById(id);
+		if (optional.isPresent()) {
+			pais = optional.get();
+		}
 		return pais;
 	}
 	

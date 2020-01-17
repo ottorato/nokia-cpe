@@ -40,7 +40,7 @@ public class Estado {
 		this.nombre = nombre;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="PAIS_ID")
 	public Pais getPais() {
 		return pais;

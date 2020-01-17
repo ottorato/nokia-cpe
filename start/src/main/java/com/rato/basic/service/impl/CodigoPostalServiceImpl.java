@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rato.basic.model.CodigoPostal;
+import com.rato.basic.model.Municipio;
 import com.rato.basic.repository.CodigoPostalRepository;
 import com.rato.basic.service.CodigoPostalService;
 
@@ -21,6 +22,18 @@ public class CodigoPostalServiceImpl implements CodigoPostalService {
 	
 	public CodigoPostalServiceImpl() {
 		super();
+	}
+	
+	@Override
+	public List<CodigoPostal> findByMunicipio(Municipio municipio) {
+		List<CodigoPostal> cps = repository.findByMunicipio(municipio);
+		return cps;
+	}
+	
+	@Override
+	public List<CodigoPostal> findBySCP(String cp) {
+		List<CodigoPostal> cps = repository.findBySCP(cp);
+		return cps;
 	}
 
 	@Override
@@ -49,11 +62,5 @@ public class CodigoPostalServiceImpl implements CodigoPostalService {
 	@Override
 	public void deleteById(Long id) {
 		repository.deleteById(id);
-	}
-
-	@Override
-	public CodigoPostal findByNombre(String nombre) {
-		CodigoPostal codigoPostal = repository.findByNombre(nombre);
-		return codigoPostal;
 	}
 }

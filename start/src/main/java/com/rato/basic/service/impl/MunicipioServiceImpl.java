@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rato.basic.model.Estado;
 import com.rato.basic.model.Municipio;
 import com.rato.basic.repository.MunicipioRepository;
 import com.rato.basic.service.MunicipioService;
@@ -55,6 +56,12 @@ public class MunicipioServiceImpl implements MunicipioService {
 	public Municipio findByNombre(String nombre) {
 		Municipio municipio = repository.findByNombre(nombre);
 		return municipio;
+	}
+
+	@Override
+	public List<Municipio> findByEstado(Estado estado) {
+		List<Municipio> municipios = repository.findByEstado(estado);
+		return municipios;
 	}
 
 }

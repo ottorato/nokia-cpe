@@ -33,7 +33,7 @@ public class CodigoPostal {
 	}
 
 	@Basic
-	@Column(name = "CP", nullable = false)
+	@Column(name = "CP", length = 5, nullable = false)
 	public String getsCP() {
 		return sCP;
 	}

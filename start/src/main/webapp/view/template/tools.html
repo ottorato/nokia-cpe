@@ -13,6 +13,36 @@
 					<strong>{{ vm.windowTitle }}</strong>
 				</div>
 				<div class="panel-body">
+					<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 well">
+                      	<div class="col-lg-3 col-md-4">
+                       		<label class='recortado'>Estado:</label>
+                            <select class="form-control" name="idEstado" ng-model="vm.address.idEstado" ng-change="vm.getMunicipiosPorEstado()"
+                                   ng-options="item.id as item.nombre for item in vm.estados | orderBy:'id' track by item.id"
+                                   ng-disabled="false">
+                            	<option value="">{{ ::vm.DEFAULT_OPTION_SELECT }}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                       		<label class='recortado'>Municipio:</label>
+                            <select class="form-control" name="idMunicipio" ng-model="vm.address.idMunicipio" ng-change="vm.getColoniasPorMunicipio(vm.address.idMunicipio)"
+                                   ng-options="item.id as item.nombre for item in vm.municipios | orderBy:'id' track by item.id"
+                                   ng-disabled="false">
+                            	<option value="" >{{ ::vm.DEFAULT_OPTION_SELECT }}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                       		<label class='recortado'>Colonia/Asentamiento:</label>
+                            <select class="form-control" name="idColonia" ng-model="vm.address.idColonia" ng-change="vm.setMunicipioId(vm.address.idColonia)"
+                                   ng-options="item.id as item.tipoAsentamiento + '-' + item.asentamiento for item in vm.colonias | orderBy:'id' track by item.id"
+                                   ng-disabled="false">
+                            	<option value="">{{ ::vm.DEFAULT_OPTION_SELECT }}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12" ng-show='true'>
+                       		<label class='recortado'>Código Postal:</label>
+                            <input type="text" name="cp" class="form-control" title="" ng-model="vm.address.cp" ng-change="vm.getCPData()">
+                    	</div>
+                    </div>
 				</div>
 			</div>
 		</div>

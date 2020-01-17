@@ -10,7 +10,9 @@
     	
 	    	var service = {
 	    			getAddressData: getAddressData,
-	    			cpeStatus: cpeStatus
+	    			getCPData: getCPData,
+	    			getMunicipiosPorEstado: getMunicipiosPorEstado,
+	    			getColoniasPorMunicipio: getColoniasPorMunicipio
 	    	};
 	    	return service;
 	    	
@@ -19,8 +21,16 @@
 	            return res;
 	    	}
 	    	
-	    	function cpeStatus(endpoint, id) {
-	            return commonService.ajaxGetRequets(javaControllerPrefix + '/cpeStatus?id=' + id + '&endPoint=' + endpoint);
+	    	function getCPData(cp) {
+	            return commonService.ajaxGetRequets(javaControllerPrefix + '/getCPData?cp=' + cp);
+	        }
+	    	
+	    	function getMunicipiosPorEstado(id) {
+	            return commonService.ajaxGetRequets(javaControllerPrefix + '/getMunicipiosPorEstado?id=' + id);
+	        }
+	    	
+	    	function getColoniasPorMunicipio(id) {
+	            return commonService.ajaxGetRequets(javaControllerPrefix + '/getColoniasPorMunicipio?id=' + id);
 	        }
     }]);
 })();

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rato.basic.model.Estado;
+import com.rato.basic.model.Pais;
 import com.rato.basic.repository.EstadoRepository;
 import com.rato.basic.service.EstadoService;
 
@@ -55,6 +56,12 @@ public class EstadoServiceImpl implements EstadoService{
 	public Estado findByNombre(String nombre) {
 		Estado estado = repository.findByNombre(nombre);
 		return estado;
+	}
+
+	@Override
+	public List<Estado> findByPais(Pais pais) {
+		List<Estado> list = repository.findByPais(pais);
+		return list;
 	}
 
 }

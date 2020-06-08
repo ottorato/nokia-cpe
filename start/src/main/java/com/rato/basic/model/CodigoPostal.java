@@ -16,6 +16,7 @@ public class CodigoPostal {
 	private String sCP;
 	private String tipoAsentamiento;
 	private String asentamiento;
+	private String ciudad;
 	private Municipio municipio;
 	
 	public CodigoPostal() {
@@ -60,6 +61,16 @@ public class CodigoPostal {
 
 	public void setAsentamiento(String asentamiento) {
 		this.asentamiento = asentamiento;
+	}
+	
+	@Basic
+	@Column(name = "CIUDAD", nullable = true)
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	@ManyToOne

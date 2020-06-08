@@ -9,7 +9,7 @@
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-4">
                 <div class="logo text-right">
-                    <h2>HDM</h2>
+                    <a href="#" onclick="window.location.href ='<%=request.getContextPath()%>/logout';">logout</a>
                 </div>
             </div>
         </div>

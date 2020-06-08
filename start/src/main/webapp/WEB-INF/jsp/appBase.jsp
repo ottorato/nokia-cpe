@@ -84,6 +84,7 @@
 	<script src='<c:url value="/ui/js/angularApp/service/dashboardService.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/service/catalogsService.js"/>' charset="UTF-8"></script>
 	<script src='<c:url value="/ui/js/angularApp/service/toolsService.js"/>' charset="UTF-8"></script>
+	<script src='<c:url value="/ui/js/angularApp/service/uploadService.js"/>' charset="UTF-8"></script>
 	
 	<!-- Controllers -->
 	<script src='<c:url value="/ui/js/angularApp/controller/menu.js"/>' charset="UTF-8"></script>

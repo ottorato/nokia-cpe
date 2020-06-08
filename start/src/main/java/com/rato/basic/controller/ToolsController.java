@@ -1,6 +1,5 @@
 package com.rato.basic.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.rato.basic.dto.RespuestaAngularDTO;
-import com.rato.basic.model.CPEData;
 import com.rato.basic.model.CodigoPostal;
 import com.rato.basic.model.Estado;
 import com.rato.basic.model.Municipio;
@@ -86,6 +87,12 @@ public class ToolsController {
 		mapa.put("codigosPostales", cps);
 		respuesta = new RespuestaAngularDTO(0, "", mapa);
 		return respuesta;
+	}
+	
+	@PostMapping("/upload")
+	public String handleFileUpload(@RequestParam("file") MultipartFile[] file) {
+
+		return "redirect:/";
 	}
 
 }

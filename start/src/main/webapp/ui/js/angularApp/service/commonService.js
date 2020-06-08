@@ -24,18 +24,32 @@
         var contador = 0;
 
         var service = {
+        	ajaxPostRequetsUpload: ajaxPostRequetsUpload,
             ajaxGetRequets: ajaxGetRequets,
             ajaxGetWithParamsRequets: ajaxGetWithParamsRequets,
             ajaxPostRequets: ajaxPostRequets,
             ajaxPostRequetsConfig: ajaxPostRequetsConfig,
-            
             ajaxDeleteRequest: ajaxDeleteRequest,
-            
             procesaRespuestaBackend: procesaRespuestaBackend
         };
         return service;
+        
+        function ajaxPostRequetsUpload(url, frmData) {
+        	var deferred = $q.defer();
+        	$http.post(Constants.Context.APP_PATH + url, frmData, {
+        		transformRequest: angular.identity,
+        		headers: {'Content-Type': undefined, 'Process-Data': false}
+        	}).then(
+                    function (response) {
+                    	deferred.resolve(response.data);
+                    },
+                    function (errResponse) {
+                    	return $q.reject(errResponse);
+        	});
+        	return deferred.promise;
+        }
 
-        function ajaxDeleteRequest(url){
+        function ajaxDeleteRequest(url) {
         	var deferred = $q.defer();
             $http.delete(Constants.Context.APP_PATH + url).then(
                 function (response) {
